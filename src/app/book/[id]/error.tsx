@@ -1,4 +1,4 @@
-"use clinet";
+"use client";
 
 import { useRouter } from "next/navigation";
 import { startTransition, useEffect } from "react";
