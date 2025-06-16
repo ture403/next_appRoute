@@ -33,7 +33,9 @@ async function BookDetail({ id }: { id: string }) {
 }
 
 export async function ReviewList({ bookId }: { bookId: string }) {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_SEVER_URL}/review/book/${bookId}`);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_SEVER_URL}/review/book/${bookId}`, {
+        next: { tags: [`review-${bookId}`] },
+    });
 
     if (!res.ok) {
         throw new Error(`Review fetch failed : ${res.statusText}`);
