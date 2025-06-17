@@ -15,7 +15,7 @@ async function SearchResult({ q }: { q: string }) {
 		return <div>오류가 발생했습니다.</div>;
 	}
 	const searchDatas: BookData[] = await res.json();
-
+	console.log(searchDatas);
 	return (
 		<div>
 			{searchDatas.map((book) => (
