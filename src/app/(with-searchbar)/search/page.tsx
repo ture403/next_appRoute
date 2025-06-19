@@ -1,13 +1,10 @@
 import BookItem from "@/components/book-item";
 import BookListSeletion from "@/components/skeleton/book-list-seletion";
 import { BookData } from "@/types";
-import { delay } from "@/util/delay";
 import { Metadata } from "next";
 import { Suspense } from "react";
 
 async function SearchResult({ q }: { q: string }) {
-    await delay(1500);
-
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_SEVER_URL}/book/search?q=${q}`);
 
     if (!res.ok) {
