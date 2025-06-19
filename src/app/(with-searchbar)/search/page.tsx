@@ -25,7 +25,6 @@ async function SearchResult({ q }: { q: string }) {
 }
 
 export async function generateMetadata({ searchParams }: { searchParams: Promise<{ q?: string }> }): Promise<Metadata> {
-    //현재 페이지 메타 데이터를 동적으로 생성하는 역할을 합니다.
     const { q } = await searchParams;
     return {
         title: `${q}: 한입 북스 검색`,
