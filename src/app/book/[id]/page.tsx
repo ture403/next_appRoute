@@ -5,6 +5,21 @@ import { BookData, ReviewData } from "@/types";
 import ReviewItem from "@/components/review-item";
 import Image from "next/image";
 import { Metadata } from "next";
+
+export async function generateStaticParams() {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_SEVER_URL}/book`);
+
+    if (!res.ok) {
+        throw new Error(res.statusText);
+    }
+
+    const book: BookData[] = await res.json();
+
+    return book.map((el) => ({
+        id: el.id.toString(),
+    }));
+}
+
 async function BookDetail({ id }: { id: string }) {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_SEVER_URL}/book/${id}`);
 
@@ -54,7 +69,7 @@ async function ReviewList({ bookId }: { bookId: string }) {
     );
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ id?: string }> }): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
     //현재 페이지 메타 데이터를 동적으로 생성하는 역할을 합니다.
     const { id } = await params;
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_SEVER_URL}/book/${id}`);
